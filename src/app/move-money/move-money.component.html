@@ -1,0 +1,52 @@
+<h2>Move Money</h2>
+
+<!-- Deposit Funds Section -->
+<h3>Deposit Funds</h3>
+<form [formGroup]="transactionForm" (ngSubmit)="performTransaction()">
+  <label for="toAccount">To Account:</label>
+  <select formControlName="toAccount" id="toAccount" required>
+    <option [ngValue]="null">Select an account</option>
+    <option *ngFor="let account of accounts" [ngValue]="account.number">{{ account.number }}</option>
+  </select>
+
+  <label for="depositAmount">Amount $:</label>
+  <input formControlName="amount" type="number" id="depositAmount" required min="1" />
+
+  <button type="submit">Deposit Funds</button>
+</form>
+
+<!-- Withdraw Funds Section -->
+<h3>Withdraw Funds</h3>
+<form [formGroup]="transactionForm" (ngSubmit)="performTransaction()">
+  <label for="fromAccount">From Account:</label>
+  <select formControlName="fromAccount" id="fromAccount" required>
+    <option [ngValue]="null">Select an account</option>
+    <option *ngFor="let account of accounts" [ngValue]="account.number">{{ account.number }}</option>
+  </select>
+  
+  <label for="withdrawAmount">Amount $:</label>
+  <input formControlName="amount" type="number" id="withdrawAmount" required min="1" />
+
+  <button type="submit">Withdraw Funds</button>
+</form>
+
+<!-- Transfer Funds Section -->
+<h3>Transfer Funds</h3>
+<form [formGroup]="transactionForm" (ngSubmit)="performTransaction()">
+  <label for="transferFromAccount">From Account:</label>
+  <select formControlName="fromAccount" id="transferFromAccount" required>
+    <option [ngValue]="null">Select an account</option>
+    <option *ngFor="let account of accounts" [ngValue]="account.number">{{ account.number }}</option>
+  </select>
+
+  <label for="transferToAccount">To Account Number:</label>
+  <input formControlName="toAccount" type="number" id="transferToAccount" required />
+
+  <label for="transferToSortCode">To Sort Code:</label>
+  <input formControlName="toAccountSortCode" type="number" id="transferToSortCode" required />
+
+  <label for="transferAmount">Amount $:</label>
+  <input formControlName="amount" type="number" id="transferAmount" required min="1" />
+
+  <button type="submit">Transfer Funds</button>
+</form>

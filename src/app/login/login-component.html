@@ -1,0 +1,36 @@
+<!-- <p>To begin, you must either login with your customer number, or register to be a customer.</p>
+
+<h2>Existing Customers: Login</h2>
+<form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+  <label for="customerId">Customer ID:</label>
+  <input formControlName="customerId" type="text" placeholder="Customer ID">
+  <button type="submit">Login</button>
+</form>
+
+<h2>New Customers: Register</h2>
+<form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+  <label for="fullName">Full Name:</label>
+  <input formControlName="fullName" type="text" placeholder="Full Name">
+  <button type="submit">Register</button>
+</form> -->
+
+
+<p>To begin, you must either login with your customer number, or register to be a customer.</p>
+
+<h2>Existing Customers: Login</h2>
+<form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+  <label for="customerId">Customer ID:</label>
+  <input formControlName="customerId" type="text" placeholder="Customer ID">
+  <button type="submit">Login</button>
+</form>
+
+<h2>New Customers: Register</h2>
+<form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+  <label for="fullName">Full Name:</label>
+  <input formControlName="fullName" type="text" placeholder="Full Name">
+  <button type="submit">Register</button>
+</form>
+
+<div *ngIf="errorMessage" class="error">
+  {{ errorMessage }}
+</div>

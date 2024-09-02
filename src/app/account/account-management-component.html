@@ -1,0 +1,71 @@
+
+<h1>Account Management</h1>
+<!-- <app-move-money [accounts]="accounts"></app-move-money> -->
+
+<nav>
+  <!-- Navigation links to My Accounts and Move Money views -->
+  <a routerLink="/accounts" [queryParams]="{ customerId: customerId }">My Accounts</a> |
+  <a routerLink="/moveMoney" [queryParams]="{ customerId: customerId }">Move Money</a>
+</nav>
+
+<!-- Account Display Section -->
+<div *ngIf="view === 'accounts'; else loading">
+  <h2>Your Accounts</h2>
+  <!-- Display the table only if there are more than 1 account -->
+  <table *ngIf="accounts.length > 1; else noAccounts">
+    <thead>
+      <tr>
+        <th>Account Number</th>
+        <th>Sort Code</th>
+        <th>Account Name</th>
+        <th>Opening Balance</th>
+        <th>Current Balance</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop through accounts and display each account's details -->
+      <tr *ngFor="let account of accounts">
+        <td>{{ account.number }}</td>
+        <td>{{ account.sortCode }}</td>
+        <td>{{ account.name }}</td>
+        <td>{{ account.openingBalance | currency }}</td>
+        <td>{{ account.balance | currency }}</td>
+        <td>
+          <!-- Use 'attr.aria-label' to bind dynamically -->
+          <button (click)="viewTransactions(account.number)" [attr.aria-label]="'View transactions for account ' + account.number">View Transactions</button>
+          <button (click)="closeAccount(account.number)" [attr.aria-label]="'Close account ' + account.number">Close Account</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Message displayed when there are less than 2 accounts -->
+  <ng-template #noAccounts>
+    <p>You must have more than one account to view the list. Please open a new account if you only have one or none.</p>
+  </ng-template>
+
+  <!-- Form to open a new account -->
+  <h2>Open New Account</h2>
+  <form (ngSubmit)="openAccount()">
+    <label for="newAccountName">Account Name:</label>
+    <input [(ngModel)]="newAccountName" type="text" id="newAccountName" name="newAccountName" required />
+    
+    <label for="newOpeningBalance">Opening Balance:</label>
+    <input [(ngModel)]="newOpeningBalance" type="number" id="newOpeningBalance" name="newOpeningBalance" required />
+    
+    <button type="submit">Open Account</button>
+  </form>
+</div>
+
+<!-- Loading state template -->
+<ng-template #loading>
+  <p>Loading accounts...</p>
+</ng-template>
+
+<!-- Move Money Section -->
+<div *ngIf="accounts.length > 0 && view === 'moveMoney'">
+  <app-move-money [accounts]="accounts"></app-move-money>
+</div>
+
+
