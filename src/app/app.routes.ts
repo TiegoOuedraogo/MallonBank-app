@@ -7,7 +7,7 @@ import { MoveMoneyComponent } from './move-money/move-money.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'customers', component: CustomerComponent }, // Corrected this line
+  { path: 'customers', component: CustomerComponent }, 
   { path: 'accounts', component: AccountManagementComponent },
   { path: 'moveMoney', component: MoveMoneyComponent },
   { path: 'transactions', component: TransactionComponent },

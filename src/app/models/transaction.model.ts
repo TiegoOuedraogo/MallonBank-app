@@ -8,6 +8,7 @@ export interface TransactionRequest {
   }
   
   export interface TransactionResponse {
+date: string|number|Date;
     time: string;
     type: 'DEPOSIT' | 'WITHDRAWAL' | 'TRANSFER';
     fromAccount?: number;

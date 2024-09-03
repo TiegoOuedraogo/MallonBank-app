@@ -32,7 +32,7 @@ export class CustomerComponent implements OnInit {
     const customerData = { name: customerName };
     this.bankService.createCustomer(customerData).subscribe(result => {
       this.customers.push(result);
-      this.router.navigate(['accounts'], { queryParams: { customerId: result.id } }); // Redirect after creating a customer
+      this.router.navigate(['accounts'], { queryParams: { customerId: result.id } }); 
     });
   }
 

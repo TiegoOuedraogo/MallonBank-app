@@ -31,6 +31,5 @@ export class TransactionService {
   }
 }
 
-// Update this line to use `export type`
+// Export the TransactionResponse type correctly
 export type { TransactionResponse };
-

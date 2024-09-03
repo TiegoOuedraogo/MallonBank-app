@@ -1,21 +1,22 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TransactionService, TransactionResponse } from '../services/transactions.services';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-transaction',
   standalone: true,
-  imports: [],
+  imports: [CommonModule], 
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.scss']
 })
 export class TransactionComponent implements OnInit {
-  @Input() accounts: any[] = []; // Define account type if possible
+  @Input() accounts: any[] = []; 
   transactions: TransactionResponse[] = [];
   customerId!: number;
   accountNumber!: number;
 
-  constructor(private transactionService: TransactionService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private transactionService: TransactionService, public router: Router, private route: ActivatedRoute) {} 
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {

@@ -1,6 +1,5 @@
 <h2>Move Money</h2>
 
-<!-- Deposit Funds Section -->
 <h3>Deposit Funds</h3>
 <form [formGroup]="transactionForm" (ngSubmit)="performTransaction()">
   <label for="toAccount">To Account:</label>
@@ -15,7 +14,6 @@
   <button type="submit">Deposit Funds</button>
 </form>
 
-<!-- Withdraw Funds Section -->
 <h3>Withdraw Funds</h3>
 <form [formGroup]="transactionForm" (ngSubmit)="performTransaction()">
   <label for="fromAccount">From Account:</label>
@@ -30,7 +28,6 @@
   <button type="submit">Withdraw Funds</button>
 </form>
 
-<!-- Transfer Funds Section -->
 <h3>Transfer Funds</h3>
 <form [formGroup]="transactionForm" (ngSubmit)="performTransaction()">
   <label for="transferFromAccount">From Account:</label>
@@ -49,4 +46,5 @@
   <input formControlName="amount" type="number" id="transferAmount" required min="1" />
 
   <button type="submit">Transfer Funds</button>
-</form>
+</form> 
+

@@ -41,7 +41,6 @@ export class AccountManagementComponent implements OnInit {
       }
     });
 
-    // Detect route changes to update view
     this.route.url.subscribe(urlSegment => {
       this.view = urlSegment.toString().includes('moveMoney') ? 'moveMoney' : 'accounts';
     });
@@ -58,10 +57,10 @@ export class AccountManagementComponent implements OnInit {
     this.bankService.getAccounts().subscribe({
       next: accounts => {
         this.accounts = accounts;
-        console.log('Accounts loaded in AccountManagementComponent:', this.accounts);  // Debugging line
+        console.log('Accounts loaded in AccountManagementComponent:', this.accounts); 
         if (this.accounts.length > 0) {
           console.log('Accounts are available, switching view to "moveMoney"');
-          this.view = 'moveMoney';  // Ensure the view is correctly updated here if needed
+          this.view = 'moveMoney'; 
         }
       },
       error: error => {
@@ -82,7 +81,7 @@ export class AccountManagementComponent implements OnInit {
     this.bankService.createAccount(accountData).subscribe({
       next: result => {
         console.log('Account opened:', result);
-        this.loadAccounts(); // Reload accounts to update the list
+        this.loadAccounts(); 
       },
       error: error => {
         console.error('Failed to open account', error);
@@ -95,7 +94,7 @@ export class AccountManagementComponent implements OnInit {
     this.bankService.deleteAccount(accountNumber).subscribe({
       next: data => {
         console.log('Account closed:', data);
-        this.loadAccounts(); // Reload accounts to update the list
+        this.loadAccounts(); 
       },
       error: error => {
         console.error('Failed to close account', error);

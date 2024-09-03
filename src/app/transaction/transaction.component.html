@@ -1,0 +1,34 @@
+<h2>Transaction History</h2>
+
+<!-- Display transactions if there are any -->
+<div *ngIf="transactions.length > 0; else noTransactions">
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>From Account</th>
+        <th>To Account</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop through each transaction and display its details -->
+      <tr *ngFor="let transaction of transactions">
+        <td>{{ transaction.date | date:'short' }}</td>
+        <td>{{ transaction.type }}</td>
+        <td>{{ transaction.amount | currency }}</td>
+        <td>{{ transaction.fromAccount }}</td>
+        <td>{{ transaction.toAccount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Message displayed when there are no transactions -->
+<ng-template #noTransactions>
+  <p>No transactions found for this account.</p>
+</ng-template>
+
+<!-- Back to Accounts Button -->
+<button (click)="router.navigate(['/accounts'], { queryParams: { customerId: customerId } })">Back to Accounts</button>

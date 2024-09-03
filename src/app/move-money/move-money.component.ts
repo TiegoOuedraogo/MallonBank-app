@@ -25,7 +25,7 @@ export class MoveMoneyComponent implements OnInit, OnChanges {
   ) {
     this.transactionForm = this.fb.group({
       type: ['DEPOSIT', Validators.required],
-      fromAccount: [null, Validators.required], // Ensure these fields have validators
+      fromAccount: [null, Validators.required], 
       toAccount: [null, Validators.required],
       toAccountSortCode: [null, Validators.required],
       amount: [null, [Validators.required, Validators.min(1)]]
@@ -33,9 +33,9 @@ export class MoveMoneyComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log('Accounts received in MoveMoneyComponent:', this.accounts); // Debugging line
+    console.log('Accounts received in MoveMoneyComponent:', this.accounts); 
     setTimeout(() => {
-      console.log('Accounts after setTimeout in MoveMoneyComponent:', this.accounts); // Debugging after a delay
+      console.log('Accounts after setTimeout in MoveMoneyComponent:', this.accounts); 
     }, 1000);
     
     this.transactionForm.get('type')?.valueChanges.subscribe(type => {
@@ -95,7 +95,7 @@ export class MoveMoneyComponent implements OnInit, OnChanges {
       });
     } else {
       console.error('Transaction form is invalid.');
-      console.log(this.transactionForm.errors); // Log the form errors to understand why it's invalid
+      console.log(this.transactionForm.errors); 
     }
   }
 
