@@ -1,26 +1,27 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { BankService } from '../services/bank.service';
 import { Account } from '../models/account.model';
 import { isPlatformBrowser } from '@angular/common';
-import { MoveMoneyComponent } from "../move-money/move-money.component";
+import { MoveMoneyComponent } from '../move-money/move-money.component';
 
 @Component({
   selector: 'app-account-management',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, MoveMoneyComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, MoveMoneyComponent, RouterOutlet],
   templateUrl: './account-management-component.html',
   styleUrls: ['./account-management-component.scss']
 })
 export class AccountManagementComponent implements OnInit {
-  customerId!: string;
+  customerId!: string|null;
   accounts: Account[] = [];
   newAccountName: string = '';
   newOpeningBalance: number = 0;
   view: string = 'accounts';
   isBrowser: boolean;
+  // @Input() accounts: Account[] = [];
 
   constructor(
     private bankService: BankService,
@@ -32,12 +33,12 @@ export class AccountManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.customerId = params['customerId'];
+    this.route.paramMap.subscribe(params => {
+      this.customerId = params.get('id');
       if (this.customerId) {
         this.handleCustomerId(this.customerId);
       } else {
-        this.router.navigate(['/login']);
+        //this.router.navigate(['/accounts']);
       }
     });
 
@@ -55,9 +56,9 @@ export class AccountManagementComponent implements OnInit {
 
   loadAccounts(): void {
     this.bankService.getAccounts().subscribe({
-      next: accounts => {
-        this.accounts = accounts;
-        console.log('Accounts loaded in AccountManagementComponent:', this.accounts); 
+      next: result => {
+        this.accounts = [...result];
+        console.log('Accounts loaded in AccountManagementComponent:', result); 
         if (this.accounts.length > 0) {
           console.log('Accounts are available, switching view to "moveMoney"');
           this.view = 'moveMoney'; 
@@ -111,3 +112,4 @@ export class AccountManagementComponent implements OnInit {
     }
   }
 }
+
