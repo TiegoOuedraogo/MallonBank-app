@@ -17,7 +17,7 @@ import { BankService } from '../services/bank.service';
 export class MoveMoneyComponent implements OnInit, OnChanges {
   transactionForm: FormGroup;
   transactionTypes = ['DEPOSIT', 'WITHDRAWAL', 'TRANSFER'];
-  accounts: Account[] = []; // Ensure proper typing here
+  accounts: Account[] = []; 
   
   constructor(
     private fb: FormBuilder,
