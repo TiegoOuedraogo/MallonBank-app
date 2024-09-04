@@ -21,7 +21,9 @@ export class TransactionComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.customerId = +params['customerId'];
+      console.log("Transactions file line 24" +this.customerId)
       this.accountNumber = +params['accountNumber'];
+      console.log("Transactions file line 26" +this.accountNumber)
       if (!this.customerId) {
         this.router.navigate(['/login']);
       } else {
@@ -43,3 +45,4 @@ export class TransactionComponent implements OnInit {
     });
   }
 }
+

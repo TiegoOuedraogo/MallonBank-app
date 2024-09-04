@@ -21,7 +21,6 @@ export class AccountManagementComponent implements OnInit {
   newOpeningBalance: number = 0;
   view: string = 'accounts';
   isBrowser: boolean;
-  // @Input() accounts: Account[] = [];
 
   constructor(
     private bankService: BankService,
@@ -38,7 +37,6 @@ export class AccountManagementComponent implements OnInit {
       if (this.customerId) {
         this.handleCustomerId(this.customerId);
       } else {
-        //this.router.navigate(['/accounts']);
       }
     });
 

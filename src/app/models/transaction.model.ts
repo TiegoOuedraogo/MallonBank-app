@@ -1,5 +1,5 @@
 export interface TransactionRequest {
-    type: 'DEPOSIT' | 'WITHDRAWAL' | 'TRANSFER';
+    type: number;
     fromAccount?: number;
     fromAccountSortCode?: number;
     toAccount?: number;
@@ -10,7 +10,7 @@ export interface TransactionRequest {
   export interface TransactionResponse {
 date: string|number|Date;
     time: string;
-    type: 'DEPOSIT' | 'WITHDRAWAL' | 'TRANSFER';
+    type: number;
     fromAccount?: number;
     fromAccountSortCode?: number;
     toAccount?: number;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { TransactionRequest, TransactionResponse } from '../models/transaction.model';
 
@@ -12,11 +12,24 @@ export class TransactionService {
 
   constructor(private http: HttpClient) {}
 
+
   performTransaction(transactionData: TransactionRequest): Observable<TransactionResponse> {
     return this.http.post<TransactionResponse>(`${this.baseUrl}`, transactionData).pipe(
-      catchError(error => { throw new Error('Error in performing transaction: ' + error); })
+      catchError(error => {
+        console.error('HTTP Error', error);
+        if (error.error instanceof ErrorEvent) {
+          console.error('Client-side error:', error.error.message);
+        } else {
+          console.error(`Server-side error: ${error.status} - ${error.message}`);
+          console.error('Error details:', error.error); 
+        }
+        return throwError(() => new Error('Error in performing transaction: ' + error.message));
+      })
     );
   }
+  
+  
+  
 
   getTransactions(): Observable<TransactionResponse[]> {
     return this.http.get<TransactionResponse[]>(`${this.baseUrl}/all`).pipe(
@@ -31,5 +44,5 @@ export class TransactionService {
   }
 }
 
-// Export the TransactionResponse type correctly
 export type { TransactionResponse };
+
