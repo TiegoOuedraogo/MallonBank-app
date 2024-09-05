@@ -1,8 +1,9 @@
+
 .login-register-container {
   max-width: 500px;
   margin: 0 auto;
   padding: 30px;
-  background-color: #f7f9fc;
+  backdrop-filter: blur(40px);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
