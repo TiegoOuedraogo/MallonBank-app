@@ -1,62 +1,58 @@
+<div class="account-management">
+  <h1>Welcome, {{ customerName }}!</h1>
 
-<h1>Account Management</h1>
+  <nav class="navigation">
+    <a [routerLink]="['/accounts', customerId]" [queryParams]="{ customerId: customerId }" class="nav-link">My Accounts</a> |
+    <a [routerLink]="['/moveMoney']" [queryParams]="{ customerId: customerId }" class="nav-link">Move Money</a>
+  </nav>
 
-<nav>
-  <a routerLink="/accounts" [queryParams]="{ customerId: customerId }">My Accounts</a> |
-  <a routerLink="/moveMoney" [queryParams]="{ customerId: customerId }">Move Money</a>
-</nav>
-
-
-@if(accounts.length > 0) {
-  <div>
+  <div *ngIf="accounts.length > 0; else loading" class="account-table-container">
     <h2>Accounts</h2>
-    
-    
-      <table>
-        <thead>
-          <tr>
-            <th>Account Number</th>
-            <th>Sort Code</th>
-            <th>Account Name</th>
-            <th>Opening Balance</th>
-            <th>Current Balance</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (account of accounts; track $index) {
-          <tr>
-            <td>{{ account.number }}</td>
-            <td>{{ account.sortCode }}</td>
-            <td>{{ account.name }}</td>
-            <td>{{ account.openingBalance | currency }}</td>
-            <td>{{ account.balance | currency }}</td>
-            <td>
-              <button (click)="viewTransactions(account.number)" [attr.aria-label]="'View transactions for account ' + account.number">View Transactions</button>
-              <button (click)="closeAccount(account.number)" [attr.aria-label]="'Close account ' + account.number">Close Account</button>
-            </td>
-          </tr>
-        }
-        </tbody>
-      </table>
-
-      </div>
-}
-    @else {
-      <p>Loading...</p>
-    }
-    
-  <div>
-    <h2>Open New Account</h2>
-    <form (ngSubmit)="openAccount()">
-      <label for="newAccountName">Account Name:</label>
-      <input [(ngModel)]="newAccountName" type="text" id="newAccountName" name="newAccountName" required />
-      
-      <label for="newOpeningBalance">Opening Balance:</label>
-      <input [(ngModel)]="newOpeningBalance" type="number" id="newOpeningBalance" name="newOpeningBalance" required />
-      
-      <button type="submit">Open Account</button>
-    </form>
+    <table class="account-table">
+      <thead>
+        <tr>
+          <th>Account Number</th>
+          <th>Sort Code</th>
+          <th>Account Name</th>
+          <th>Opening Balance</th>
+          <th>Current Balance</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let account of accounts; trackBy: trackByAccountNumber">
+          <td>{{ account.number }}</td>
+          <td>{{ account.sortCode }}</td>
+          <td>{{ account.name }}</td>
+          <td>{{ account.openingBalance | currency }}</td>
+          <td>{{ account.balance | currency }}</td>
+          <td>
+            <button class="action-button" (click)="viewTransactions(account.number)">View Transactions</button>
+            <button class="action-button" (click)="closeAccount(account.number)">Close Account</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
+  <ng-template #loading>
+    <p>Loading...</p>
+  </ng-template>
 
+  <div class="open-account-form">
+    <h2>Open New Account</h2>
+    <form (ngSubmit)="openAccount()">
+      <div class="form-group">
+        <label for="newAccountName">Account Name:</label>
+        <input [(ngModel)]="newAccountName" type="text" id="newAccountName" name="newAccountName" required class="form-control"/>
+      </div>
+      
+      <div class="form-group">
+        <label for="newOpeningBalance">Opening Balance:</label>
+        <input [(ngModel)]="newOpeningBalance" type="number" id="newOpeningBalance" name="newOpeningBalance" required class="form-control"/>
+      </div>
+
+      <button type="submit" class="submit-button">Open Account</button>
+    </form>
+  </div>
+</div>

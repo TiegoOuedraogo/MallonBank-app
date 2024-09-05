@@ -1,0 +1,26 @@
+<h1 class="page-title">Customer Management</h1>
+
+<div *ngIf="customers.length > 0; else noCustomers" class="customers-section">
+  <h2 class="section-title">Existing Customers</h2>
+  <ul class="customer-list">
+    <li *ngFor="let customer of customers" class="customer-item">
+      {{ customer.name }}
+      <button class="delete-button" (click)="deleteCustomer(customer.id)">Delete</button>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noCustomers>
+  <p class="no-customers-text">No customers found.</p>
+</ng-template>
+
+<div class="create-customer-section">
+  <h2 class="section-title">Create New Customer</h2>
+  <form (ngSubmit)="createCustomer(newCustomerName)" class="create-customer-form">
+    <label for="newCustomerName" class="form-label">Full Name:</label>
+    <input [(ngModel)]="newCustomerName" type="text" id="newCustomerName" name="newCustomerName" required class="input-field" />
+    <button type="submit" class="submit-button">Register</button>
+  </form>
+</div>
+
+<button class="nav-button" (click)="goToAccounts()">Go to Accounts</button>

@@ -1,34 +1,38 @@
-<h2>Transaction History</h2>
+<div class="transaction-history">
+  <h2>Transaction History for Account: {{ selectedAccount?.name }}</h2>
+  <p><strong>Opening Balance:</strong> {{ selectedAccount?.openingBalance | currency }}</p>
+  <p><strong>Current Balance:</strong> {{ selectedAccount?.balance | currency }}</p>
 
-<!-- Display transactions if there are any -->
-<div *ngIf="transactions.length > 0; else noTransactions">
-  <table>
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Type</th>
-        <th>Amount</th>
-        <th>From Account</th>
-        <th>To Account</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Loop through each transaction and display its details -->
-      <tr *ngFor="let transaction of transactions">
-        <td>{{ transaction.date | date:'short' }}</td>
-        <td>{{ transaction.type }}</td>
-        <td>{{ transaction.amount | currency }}</td>
-        <td>{{ transaction.fromAccount }}</td>
-        <td>{{ transaction.toAccount }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngIf="transactions && transactions.length > 0; else noTransactions" class="transaction-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>From Account</th>
+          <th>To Account</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaction of transactions">
+          <td>{{ transaction.timestamp | date:'short' }}</td>
+          <td>{{ getTransactionType(transaction.transactionType) }}</td>
+          <td>{{ transaction.amount | currency }}</td>
+          <td>{{ transaction.fromAccountNumber ? transaction.fromAccountNumber : 'N/A' }}</td>
+          <td>{{ transaction.toAccountNumber ? transaction.toAccountNumber : 'N/A' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noTransactions>
+    <p>No transactions found for this account.</p>
+  </ng-template>
+
+  <div class="back-button">
+    <button (click)="router.navigate(['/accounts', customerId], { queryParams: { customerId: customerId } })">
+      Back to Accounts
+    </button>
+  </div>
 </div>
-
-<!-- Message displayed when there are no transactions -->
-<ng-template #noTransactions>
-  <p>No transactions found for this account.</p>
-</ng-template>
-
-<!-- Back to Accounts Button -->
-<button (click)="router.navigate(['/accounts'], { queryParams: { customerId: customerId } })">Back to Accounts</button>

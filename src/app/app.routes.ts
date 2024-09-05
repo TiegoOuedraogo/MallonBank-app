@@ -8,9 +8,11 @@ import { MoveMoneyComponent } from './move-money/move-money.component';
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'customers', component: CustomerComponent }, 
-  { path: 'accounts/:id', component: AccountManagementComponent },
+  { path: 'accounts/:id', component: AccountManagementComponent }, 
   { path: 'moveMoney', component: MoveMoneyComponent },
   { path: 'transactions', component: TransactionComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
+
+

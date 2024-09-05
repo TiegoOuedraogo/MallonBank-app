@@ -6,6 +6,7 @@ import { BankService } from '../services/bank.service';
 import { Account } from '../models/account.model';
 import { isPlatformBrowser } from '@angular/common';
 import { MoveMoneyComponent } from '../move-money/move-money.component';
+// import '~@angular/material/core/theming/all-theme';
 
 @Component({
   selector: 'app-account-management',
@@ -15,7 +16,8 @@ import { MoveMoneyComponent } from '../move-money/move-money.component';
   styleUrls: ['./account-management-component.scss']
 })
 export class AccountManagementComponent implements OnInit {
-  customerId!: string|null;
+  customerId!: number;
+  customerName: string = '';
   accounts: Account[] = [];
   newAccountName: string = '';
   newOpeningBalance: number = 0;
@@ -33,10 +35,12 @@ export class AccountManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.customerId = params.get('id');
-      if (this.customerId) {
+      const customerIdParam = params.get('id');
+      if (customerIdParam) {
+        this.customerId = Number(customerIdParam);
         this.handleCustomerId(this.customerId);
       } else {
+        this.router.navigate(['/login']);
       }
     });
 
@@ -45,21 +49,34 @@ export class AccountManagementComponent implements OnInit {
     });
   }
 
-  handleCustomerId(customerId: string): void {
+  handleCustomerId(customerId: number): void {
     if (this.isBrowser) {
-      localStorage.setItem('customerId', customerId);
+      localStorage.setItem('customerId', customerId.toString());
     }
+    this.loadCustomerDetails(customerId);
     this.loadAccounts();
+  }
+
+  loadCustomerDetails(customerId: number): void {
+    this.bankService.getCustomer(customerId).subscribe({
+      next: (customer) => {
+        this.customerName = customer.fullName;
+      },
+      error: (error) => {
+        console.error('Failed to fetch customer details', error);
+      }
+    });
   }
 
   loadAccounts(): void {
     this.bankService.getAccounts().subscribe({
       next: result => {
         this.accounts = [...result];
-        console.log('Accounts loaded in AccountManagementComponent:', result); 
+        console.log('Accounts loaded in AccountManagementComponent:', result);
+        this.resetFormFields();  // Reset form fields after loading accounts
         if (this.accounts.length > 0) {
           console.log('Accounts are available, switching view to "moveMoney"');
-          this.view = 'moveMoney'; 
+          this.view = 'moveMoney';
         }
       },
       error: error => {
@@ -68,11 +85,10 @@ export class AccountManagementComponent implements OnInit {
       }
     });
   }
-  
 
   openAccount(): void {
     const accountData = {
-      customerId: Number(this.customerId),
+      customerId: this.customerId,
       accountName: this.newAccountName,
       openingBalance: this.newOpeningBalance
     };
@@ -109,5 +125,21 @@ export class AccountManagementComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
-}
 
+  moveMoney(): void {
+    if (this.customerId) {
+      this.router.navigate(['/moveMoney'], { queryParams: { customerId: this.customerId } });
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  trackByAccountNumber(index: number, account: Account): number {
+    return account.number;
+  }
+
+  resetFormFields(): void {
+    this.newAccountName = '';
+    this.newOpeningBalance = 0;
+  }
+}

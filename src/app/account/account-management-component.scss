@@ -1,130 +1,131 @@
-:host {
-    display: block;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 0 auto;
+.account-management {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
-
   h1 {
-    font-size: 28px;
     color: #333;
-    margin-bottom: 20px;
     text-align: center;
-  }
-  
-  h2 {
-    font-size: 24px;
-    color: #555;
     margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  
-  form {
-    margin-bottom: 30px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
- 
-  label {
-    display: block;
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 5px;
   }
 
-  input[type="text"],
-  input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-
-  button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-right: 5px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  thead {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  th,
-  td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
-  th {
-    font-size: 16px;
-    font-weight: normal;
-  }
-  
-  tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  
- 
-  nav {
+  .navigation {
     text-align: center;
     margin-bottom: 20px;
   }
+    .nav-link {
+      color: #007bff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .account-table-container {
+      .account-table {
   
-  nav a {
-    text-decoration: none;
-    color: #007bff;
-    margin: 0 10px;
-    transition: color 0.3s;
+        .button-group {
+          display: flex;
+          gap: 10px; 
+        }
+  
+      }
+    }
+  
+  
+
+  .account-table-container {
+    margin-top: 20px;
+
+    h2 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .account-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      overflow: hidden;
+
+      th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #007bff;
+        color: white;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      td {
+        color: #333;
+      }
+    }
+
+    .action-button {
+      background-color: #007bff;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 5px;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
   }
-  
-  nav a:hover {
-    color: #0056b3;
+
+  .open-account-form {
+    margin-top: 30px;
+
+    h2 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+    }
+
+    .submit-button {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #218838;
+      }
+    }
   }
-  
- 
-  p {
-    font-size: 16px;
-    color: #666;
-    text-align: center;
-    margin: 20px 0;
-  }
-  
-  
-  .error {
-    color: red;
-    font-weight: bold;
-    margin-top: 10px;
-    text-align: center;
-  }
-  

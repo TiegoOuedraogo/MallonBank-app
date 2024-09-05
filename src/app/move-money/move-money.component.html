@@ -1,62 +1,88 @@
- <form [formGroup]="transactionForm" (ngSubmit)="performTransaction()">
-  <label for="type">Transaction Type:</label>
-  <select formControlName="type" id="type">
-    <option *ngFor="let type of transactionTypes" [value]="type">{{ type }}</option>
-  </select>
-
-  <!-- Deposit Form -->
-  <div *ngIf="transactionForm.get('type')?.value === 'DEPOSIT'">
-    <label for="toAccount">To Account:</label>
-    <select formControlName="toAccount" id="toAccount">
-      <option [ngValue]="null">Select an account</option>
-      <option *ngFor="let account of accounts" [ngValue]="account.number">{{ account.number }}</option>
-    </select>
-
-    <label for="toAccountSortCode">To Account SortCode:</label>
-    <select formControlName="toAccountSortCode" id="toAccountSortCode">
-      <option [ngValue]="null">Select sort code</option>
-      <option *ngFor="let account of accounts" [ngValue]="account.sortCode">{{ account.sortCode }}</option>
+<form [formGroup]="transactionForm" (ngSubmit)="performTransaction()" class="transaction-form">
+  
+  <div class="form-group">
+    <label for="type" class="form-label">Transaction Type:</label>
+    <select formControlName="type" id="type" class="form-control">
+      <option *ngFor="let type of transactionTypes" [value]="type">{{ type }}</option>
     </select>
   </div>
 
-  <!-- Withdrawal Form -->
-  <div *ngIf="transactionForm.get('type')?.value === 'WITHDRAWAL'">
-    <label for="fromAccount">From Account:</label>
-    <select formControlName="fromAccount" id="fromAccount">
-      <option [ngValue]="null">Select an account</option>
-      <option *ngFor="let account of accounts" [ngValue]="account.number">{{ account.number }}</option>
-    </select>
+  
+  <div *ngIf="transactionForm.get('type')?.value === 'DEPOSIT'" class="conditional-section">
+    <div class="form-group">
+      <label for="toAccount" class="form-label">To Account:</label>
+      <select formControlName="toAccount" id="toAccount" class="form-control">
+        <option [ngValue]="null">Select an account</option>
+        <option *ngFor="let account of accounts" [ngValue]="account.number">{{ account.number }}</option>
+      </select>
+    </div>
 
-    <label for="fromAccountSortCode">From Account SortCode:</label>
-    <select formControlName="fromAccountSortCode" id="fromAccountSortCode">
-      <option [ngValue]="null">Select sort code</option>
-      <option *ngFor="let account of accounts" [ngValue]="account.sortCode">{{ account.sortCode }}</option>
-    </select>
+    <div class="form-group">
+      <label for="toAccountSortCode" class="form-label">To Account Sort Code:</label>
+      <select formControlName="toAccountSortCode" id="toAccountSortCode" class="form-control">
+        <option [ngValue]="null">Select sort code</option>
+        <option *ngFor="let account of accounts" [ngValue]="account.sortCode">{{ account.sortCode }}</option>
+      </select>
+    </div>
   </div>
 
-  <!-- Transfer Form -->
-  <div *ngIf="transactionForm.get('type')?.value === 'TRANSFER'">
-    <label for="fromAccount">From Account:</label>
-    <select formControlName="fromAccount" id="fromAccount">
-      <option [ngValue]="null">Select an account</option>
-      <option *ngFor="let account of accounts" [ngValue]="account.number">{{ account.number }}</option>
-    </select>
+ 
+  <div *ngIf="transactionForm.get('type')?.value === 'WITHDRAWAL'" class="conditional-section">
+    <div class="form-group">
+      <label for="fromAccount" class="form-label">From Account:</label>
+      <select formControlName="fromAccount" id="fromAccount" class="form-control">
+        <option [ngValue]="null">Select an account</option>
+        <option *ngFor="let account of accounts" [ngValue]="account.number">{{ account.number }}</option>
+      </select>
+    </div>
 
-    <label for="fromAccountSortCode">From Account Sort Code:</label>
-    <select formControlName="fromAccountSortCode" id="fromAccountSortCode">
-      <option [ngValue]="null">Select sort code</option>
-      <option *ngFor="let account of accounts" [ngValue]="account.sortCode">{{ account.sortCode }}</option>
-    </select>
-
-    <label for="toAccount">To Account Number:</label>
-    <input formControlName="toAccount" type="number" id="toAccount" />
-
-    <label for="toAccountSortCode">To Sort Code:</label>
-    <input formControlName="toAccountSortCode" type="number" id="toAccountSortCode" />
+    <div class="form-group">
+      <label for="fromAccountSortCode" class="form-label">From Account Sort Code:</label>
+      <select formControlName="fromAccountSortCode" id="fromAccountSortCode" class="form-control">
+        <option [ngValue]="null">Select sort code</option>
+        <option *ngFor="let account of accounts" [ngValue]="account.sortCode">{{ account.sortCode }}</option>
+      </select>
+    </div>
   </div>
 
-  <label for="amount">Amount $:</label>
-  <input formControlName="amount" type="number" id="amount" min="1" />
+  
+  <div *ngIf="transactionForm.get('type')?.value === 'TRANSFER'" class="conditional-section">
+    <div class="form-group">
+      <label for="fromAccount" class="form-label">From Account:</label>
+      <select formControlName="fromAccount" id="fromAccount" class="form-control">
+        <option [ngValue]="null">Select an account</option>
+        <option *ngFor="let account of accounts" [ngValue]="account.number">{{ account.number }}</option>
+      </select>
+    </div>
 
-  <button type="submit">Submit</button>
+    <div class="form-group">
+      <label for="fromAccountSortCode" class="form-label">From Account Sort Code:</label>
+      <select formControlName="fromAccountSortCode" id="fromAccountSortCode" class="form-control">
+        <option [ngValue]="null">Select sort code</option>
+        <option *ngFor="let account of accounts" [ngValue]="account.sortCode">{{ account.sortCode }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="toAccount" class="form-label">To Account Number:</label>
+      <input formControlName="toAccount" type="number" id="toAccount" class="form-control" placeholder="Enter account number" />
+    </div>
+
+    <div class="form-group">
+      <label for="toAccountSortCode" class="form-label">To Sort Code:</label>
+      <input formControlName="toAccountSortCode" type="number" id="toAccountSortCode" class="form-control" placeholder="Enter sort code" />
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="amount" class="form-label">Amount $:</label>
+    <input formControlName="amount" type="number" id="amount" min="1" class="form-control" placeholder="Enter amount" />
+  </div>
+
+
+  <div class="form-group action-buttons">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelTransaction()">Cancel</button>
+  </div>
 </form>

@@ -1,36 +1,27 @@
-<p>To begin, you must either login with your customer number, or register to be a customer.</p>
+<div class="login-register-container">
+  <p class="intro-text">
+    To begin, you must either log in with your customer number or register to become a customer.
+  </p>
 
-<h2>Existing Customers: Login</h2>
-<form [formGroup]="form" (ngSubmit)="onFormSubmit()">
-  <label for="customerId">Customer ID:</label>
-  <input formControlName="customerId" type="text" placeholder="Customer ID">
-  <button type="submit">Login</button>
-</form>
+  <div class="login-section">
+    <h2 class="section-title">Existing Customers: Login</h2>
+    <form [formGroup]="form" (ngSubmit)="onFormSubmit()" class="form-container">
+      <div class="form-group">
+        <label for="customerId" class="form-label">Customer ID:</label>
+        <input formControlName="customerId" type="text" id="customerId" class="input-field" placeholder="Enter your Customer ID">
+      </div>
+      <button type="submit" class="primary-button">Login</button>
+    </form>
+  </div>
 
-<h2>New Customers: Register</h2>
-<form [formGroup]="form" (ngSubmit)="onFormSubmit()">
-  <label for="fullName">Full Name:</label>
-  <input formControlName="fullName" type="text" placeholder="Full Name">
-  <button type="submit">Register</button>
-</form>  
-
-<!-- <p>To begin, you must either login with your customer number, or register to be a customer.</p>
-
-<h2>Existing Customers: Login</h2>
-<form [formGroup]="form" (ngSubmit)="onFormSubmit()">
-  <label for="customerId">Customer ID:</label>
-  <input formControlName="customerId" type="text" placeholder="Customer ID">
-  <button type="submit">Login</button>
-</form>
-
-<h2>New Customers: Register</h2>
-<form [formGroup]="form" (ngSubmit)="onFormSubmit()">
-  <label for="fullName">Full Name:</label>
-  <input formControlName="fullName" type="text" placeholder="Full Name">
-  <button type="submit">Register</button>
-  
-</form>
-
-<div *ngIf="errorMessage" class="error">
-  {{ errorMessage }}
-</div>   -->
+  <div class="register-section">
+    <h2 class="section-title">New Customers: Register</h2>
+    <form [formGroup]="form" (ngSubmit)="onFormSubmit()" class="form-container">
+      <div class="form-group">
+        <label for="fullName" class="form-label">Full Name:</label>
+        <input formControlName="fullName" type="text" id="fullName" class="input-field" placeholder="Enter your Full Name">
+      </div>
+      <button type="submit" class="primary-button">Register</button>
+    </form>
+  </div>
+</div>
